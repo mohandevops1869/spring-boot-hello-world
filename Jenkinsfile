@@ -12,7 +12,7 @@ pipeline{
         stage("code analysis"){
            steps{
                 withSonarQubeEnv('sonarqube'){
-                    sh 'mvn clean verify sonar:sonar \
+                    sh '${scannerHome}/bin/sonar-sonar \
                     -Dsonar.projectKey=sonar-project-key \
                     -Dsonar.projectName='sonar-project' \
                     -Dsonar.host.url=http://desktop-rngufau:9000 \
