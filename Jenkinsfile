@@ -9,17 +9,24 @@ pipeline{
                 """
             }
         }
-        stage("code analysis"){
-           steps{
-                withSonarQubeEnv('sonarqube'){
-                    sh '${scannerHome}/bin/sonar-sonar \
-                    -Dsonar.projectKey=sonar-project-key \
-                    -Dsonar.projectName='sonar-project' \
-                    -Dsonar.host.url=http://desktop-rngufau:9000 \
-                    -Dsonar.token=sqp_8a67a799818f907570147733fc2611898d82992e'
+        stage('SonarQube analysis') {
+            environment {
+             SCANNER_HOME = tool 'sonar-scaner'
+            }
+            steps {
+                withSonarQubeEnv(credentialsId: 'sat-sonar-id', installationName: 'sonarqube') {
+                    sh '''$SCANNER_HOME/bin/sonar-scaner \
+                    -Dsonar.projectKey=projectKey \
+                    -Dsonar.projectName=sonar-projectName \
+                    -Dsonar.sources=src/ \
+                    -Dsonar.java.binaries=target/classes/ \
+                    -Dsonar.exclusions=src/test/java/****/*.java \
+                    -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
+                    -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
                 }
             }
+
         }
-    }     
+    }    
  
 }
