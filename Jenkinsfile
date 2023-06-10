@@ -18,11 +18,11 @@ pipeline{
                     sh '''$SCANNER_HOME/bin/sonar-scaner \
                     -Dsonar.projectKey=projectKey \
                     -Dsonar.projectName=sonar-projectName \
-                    -Dsonar.sources=src/ \
-                    -Dsonar.java.binaries=target/classes/ \
-                    -Dsonar.exclusions=src/test/java/****/*.java \
-                    -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
-                    -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
+                    -Dsonar.sources=. \
+                    // -Dsonar.java.binaries=target/classes/ \
+                    // -Dsonar.exclusions=src/test/java/****/*.java \
+                    // -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
+                    // -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
                 }
             }
 
