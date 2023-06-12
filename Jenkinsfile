@@ -14,16 +14,8 @@ pipeline{
              SCANNER_HOME = tool'sonarScanner4.6'
             }
             steps {
-                withSonarQubeEnv(credentialsId:'jenkins-sonar-token',installationName:'madhu') {
-                    sh '''${SCANNER_HOME}/bin/sonar-scanner -X \
-                    -Dsonar.projectKey=projectKey \
-                    -Dsonar.projectName=sonar-projectName \
-                    -Dsonar.sources=. \
-                    -Dsonar.java.binaries=target/classes/ \
-                    -Dsonar.exclusions=./test/java/****/*.java \
-                    -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
-                    -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}
-                    '''
+                  withSonarQubeEnv('sonar-env') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sonar-sprig-key -Dsonar.projectName=sonar-sprig -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
                 }
             }
 
@@ -35,7 +27,5 @@ pipeline{
                 }
             }
         }    
-
     }    
- 
 }
