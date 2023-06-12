@@ -11,11 +11,11 @@ pipeline{
         }
         stage('SonarQube analysis') {
             environment {
-             SCANNER_HOME = tool'sonar-scaner'
+             SCANNER_HOME = tool'sonarScanner4.6'
             }
             steps {
                 withSonarQubeEnv(credentialsId:'sat-sonar-id',installationName:'sonarqube') {
-                    sh '''${SCANNER_HOME}/bin/sonar-scaner \
+                    sh '''${SCANNER_HOME}/bin/sonarScanner4.6 \
                     -Dsonar.projectKey=projectKey \
                     -Dsonar.projectName=sonar-projectName \
                     -Dsonar.sources=. \
