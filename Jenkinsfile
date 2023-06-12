@@ -15,7 +15,7 @@ pipeline{
             }
             steps {
                 withSonarQubeEnv(credentialsId:'sat-sonar-id',installationName:'sonarqube') {
-                    sh '''${SCANNER_HOME}/bin/sonar-scanner \
+                    sh '''${SCANNER_HOME}/bin/sonar-scanner -X /
                     -Dsonar.projectKey=projectKey \
                     -Dsonar.projectName=sonar-projectName \
                     -Dsonar.sources=. \
