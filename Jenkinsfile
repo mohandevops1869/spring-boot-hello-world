@@ -18,7 +18,6 @@ pipeline{
                     sh '''${SCANNER_HOME}/bin/sonar-scanner -X \
                     -Dsonar.projectKey=projectKey \
                     -Dsonar.projectName=sonar-projectName \
-                    -Dsonar hostname =DESKTOP-RNGUFAU:9000
                     -Dsonar.sources=. \
                     -Dsonar.java.binaries=target/classes/ \
                     -Dsonar.exclusions=./test/java/****/*.java \
